@@ -14,6 +14,9 @@ data class ChannelModel(
 		val id: String,
 
 		@SerializedName("snippet")
-		val snippet: SnippetYt
+		val snippet: SnippetYt,
+
+		@SerializedName("brandingSettings")
+		val branding: BrandingYt
 	)
 }

@@ -1,4 +1,4 @@
-package com.kotdev99.android.youtubeapikotlin.ui.home
+package com.kotdev99.android.youtubeapikotlin.ui.video
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel() {
+class VideoViewModel : ViewModel() {
 
 	private val _channel = MutableLiveData<ChannelModel?>()
 	val channel: LiveData<ChannelModel?>
@@ -31,7 +31,7 @@ class HomeViewModel : ViewModel() {
 	private fun getChannel() {
 		_isLoading.value = true
 
-		val client = ApiConfig.getService().getChannel("snippet", "UCo7PzCcLt9Q9g7p1Wqd-yvA")
+		val client = ApiConfig.getService().getChannel("snippet", "UCGp4UBwpTNegd_4nCpuBcow")
 		client.enqueue(object : Callback<ChannelModel> {
 			override fun onResponse(call: Call<ChannelModel>, response: Response<ChannelModel>) {
 				_isLoading.value = false
@@ -56,6 +56,6 @@ class HomeViewModel : ViewModel() {
 	}
 
 	companion object {
-		private val TAG = HomeViewModel::class.java.simpleName
+		private val TAG = VideoViewModel::class.java.simpleName
 	}
 }
