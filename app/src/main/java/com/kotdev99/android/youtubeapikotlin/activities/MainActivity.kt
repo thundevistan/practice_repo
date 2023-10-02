@@ -1,12 +1,13 @@
-package com.kotdev99.android.youtubeapikotlin
+package com.kotdev99.android.youtubeapikotlin.activities
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kotdev99.android.youtubeapikotlin.R
 import com.kotdev99.android.youtubeapikotlin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

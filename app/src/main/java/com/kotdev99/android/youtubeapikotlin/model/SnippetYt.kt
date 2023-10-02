@@ -11,6 +11,9 @@ data class SnippetYt (
 	@SerializedName("description")
 	val description: String,
 
+	@SerializedName("publishedAt")
+	val publishedAt: String,
+
 	@SerializedName("customUrl")
 	val customUrl: String,
 
