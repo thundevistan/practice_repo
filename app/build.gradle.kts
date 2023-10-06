@@ -67,5 +67,8 @@ dependencies {
 	implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
 	// Glide
-	implementation ("com.github.bumptech.glide:glide:4.16.0")
+	implementation("com.github.bumptech.glide:glide:4.16.0")
+
+	// android-youtube-player
+	implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 }
