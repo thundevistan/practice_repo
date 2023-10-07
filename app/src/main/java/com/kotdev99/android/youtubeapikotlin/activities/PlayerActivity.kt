@@ -39,6 +39,7 @@ class PlayerActivity : AppCompatActivity() {
 			.rel(0)
 			.ivLoadPolicy(1)
 			.ccLoadPolicy(1)
+			.autoplay(0)
 			.build()
 
 		youTubePlayerView.initialize(

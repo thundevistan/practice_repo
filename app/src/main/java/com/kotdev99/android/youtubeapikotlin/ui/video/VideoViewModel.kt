@@ -13,23 +13,20 @@ import retrofit2.Response
 class VideoViewModel : ViewModel() {
 
 	private val _video = MutableLiveData<VideoYtModel?>()
-	val video: LiveData<VideoYtModel?>
-		get() = _video
+	val video: LiveData<VideoYtModel?> get() = _video
 
 	private val _isLoading = MutableLiveData<Boolean>()
-	val isLoading: LiveData<Boolean>
-		get() = _isLoading
+	val isLoading: LiveData<Boolean> get() = _isLoading
 
 	private val _isAllVideoLoaded = MutableLiveData<Boolean>()
-	val isAllVideoLoaded: LiveData<Boolean>
-		get() = _isAllVideoLoaded
+	val isAllVideoLoaded: LiveData<Boolean> get() = _isAllVideoLoaded
 
 	private val _message = MutableLiveData<String>()
-	val message: LiveData<String>
-		get() = _message
+	val message: LiveData<String> get() = _message
 
-	private var nextPageToken: String? = null
+	var nextPageToken: String? = null
 
+	var querySearch: String? = null
 
 	init {
 		getVideoList()
@@ -39,7 +36,7 @@ class VideoViewModel : ViewModel() {
 		_isLoading.value = true
 
 		val client = ApiConfig.getService()
-			.getVideo("snippet", "UCGp4UBwpTNegd_4nCpuBcow", "date", nextPageToken)
+			.getVideo("snippet", "UCGp4UBwpTNegd_4nCpuBcow", "date", nextPageToken, querySearch)
 		client.enqueue(object : Callback<VideoYtModel> {
 			override fun onResponse(call: Call<VideoYtModel>, response: Response<VideoYtModel>) {
 				_isLoading.value = false

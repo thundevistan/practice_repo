@@ -1,15 +1,23 @@
 package com.kotdev99.android.youtubeapikotlin.ui.video
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kotdev99.android.youtubeapikotlin.R
 import com.kotdev99.android.youtubeapikotlin.adapter.VideoAdapter
 import com.kotdev99.android.youtubeapikotlin.databinding.FragmentVideoBinding
 
@@ -19,6 +27,9 @@ class VideoFragment : Fragment() {
 	private val binding get() = _binding!!
 	private val viewModel: VideoViewModel by viewModels()
 	private val adapter = VideoAdapter()
+	private val menuHost by lazy { requireActivity() }
+	private lateinit var searchView: SearchView
+
 	private var isLoading = false
 	private var isScroll = false
 	private var currentItem = -1
@@ -38,15 +49,18 @@ class VideoFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		recycler()
+		initRecycler()
+		initMenu()
 	}
 
-	private fun recycler() = with(binding) {
+	// recycerView 구현
+	private fun initRecycler() = with(binding) {
 		val manager = LinearLayoutManager(requireActivity())
 
 		rvVideo.adapter = adapter
 		rvVideo.layoutManager = manager
 
+		// infinite scroll 구현
 		rvVideo.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 			override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 				super.onScrollStateChanged(recyclerView, newState)
@@ -99,5 +113,36 @@ class VideoFragment : Fragment() {
 				Toast.LENGTH_SHORT
 			).show()
 		}
+	}
+
+	// menu inflate 및 검색 기능
+	private fun initMenu() {
+		val imm =
+			requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+		menuHost.addMenuProvider(object : MenuProvider {
+			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+				menuInflater.inflate(R.menu.menu_search, menu)
+				searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+				searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+					override fun onQueryTextSubmit(query: String?): Boolean {
+						viewModel.querySearch = query
+						viewModel.nextPageToken = null
+						adapter.clearAll()
+						viewModel.getVideoList()
+						imm.hideSoftInputFromWindow(view?.windowToken, 0)
+						return true
+					}
+
+					override fun onQueryTextChange(newText: String?): Boolean {
+						return false
+					}
+				})
+			}
+
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+				return false
+			}
+		}, viewLifecycleOwner)
 	}
 }
