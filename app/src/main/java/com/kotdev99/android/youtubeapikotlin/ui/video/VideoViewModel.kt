@@ -36,7 +36,7 @@ class VideoViewModel : ViewModel() {
 		_isLoading.value = true
 
 		val client = ApiConfig.getService()
-			.getVideo("snippet", "UCGp4UBwpTNegd_4nCpuBcow", "date", nextPageToken, querySearch)
+			.getVideo("snippet", "UCmN88HSz-EQdwrkGXkc1ElA", "date", nextPageToken, querySearch)
 		client.enqueue(object : Callback<VideoYtModel> {
 			override fun onResponse(call: Call<VideoYtModel>, response: Response<VideoYtModel>) {
 				_isLoading.value = false

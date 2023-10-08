@@ -35,6 +35,7 @@ interface ApiServices {
 	@GET("playlistItems")
 	fun getPlaylistItems(
 		@Query("part") part: String,
-		@Query("playlistId") playlistId: String
+		@Query("playlistId") playlist: String,
+		@Query("pageToken") pageToken: String?
 	) : Call<PlaylistItemsModel>
 }

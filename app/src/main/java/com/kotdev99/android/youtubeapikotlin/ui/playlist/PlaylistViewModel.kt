@@ -31,7 +31,7 @@ class PlaylistViewModel : ViewModel() {
 		_isLoading.value = true
 		val client = ApiConfig
 			.getService()
-			.getPlaylist("snippet, contentDetails", "UCGp4UBwpTNegd_4nCpuBcow", "10", nextPageToken)
+			.getPlaylist("snippet, contentDetails", "UCmN88HSz-EQdwrkGXkc1ElA", "10", nextPageToken)
 		client.enqueue(object : Callback<PlaylistYtModel> {
 			override fun onResponse(
 				call: Call<PlaylistYtModel>,

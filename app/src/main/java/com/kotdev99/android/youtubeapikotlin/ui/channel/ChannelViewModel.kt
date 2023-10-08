@@ -32,7 +32,7 @@ class ChannelViewModel : ViewModel() {
 		_isLoading.value = true
 
 		val client = ApiConfig.getService()
-			.getChannel("snippet, brandingSettings", "UC9JWnvl5ZjZv09F5RqiLptw")
+			.getChannel("snippet, brandingSettings", "UCmN88HSz-EQdwrkGXkc1ElA")
 		client.enqueue(object : Callback<ChannelModel> {
 			override fun onResponse(call: Call<ChannelModel>, response: Response<ChannelModel>) {
 				_isLoading.value = false

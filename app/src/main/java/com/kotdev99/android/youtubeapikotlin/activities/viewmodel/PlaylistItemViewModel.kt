@@ -26,7 +26,7 @@ class PlaylistItemViewModel : ViewModel() {
 	 fun getPlaylistItem(playlistId: String) {
 		val client = ApiConfig
 			.getService()
-			.getPlaylistItems("snippet, contentDetails", playlistId)
+			.getPlaylistItems("snippet, contentDetails", playlistId, nextPageToken)
 		client.enqueue(object : Callback<PlaylistItemsModel> {
 			override fun onResponse(
 				call: Call<PlaylistItemsModel>,
@@ -38,6 +38,7 @@ class PlaylistItemViewModel : ViewModel() {
 					if (data.nextPageToken != null) {
 						nextPageToken = data.nextPageToken
 					} else {
+						nextPageToken = null
 						_isAllItemLoaded.value = true
 					}
 					if (data.items.isNotEmpty()) {
