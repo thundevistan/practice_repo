@@ -1,6 +1,7 @@
 package com.kotdev99.android.youtubeapikotlin.network
 
 import com.kotdev99.android.youtubeapikotlin.model.ChannelModel
+import com.kotdev99.android.youtubeapikotlin.model.PlaylistItemsModel
 import com.kotdev99.android.youtubeapikotlin.model.PlaylistYtModel
 import com.kotdev99.android.youtubeapikotlin.model.VideoYtModel
 import retrofit2.Call
@@ -30,4 +31,10 @@ interface ApiServices {
 		@Query("maxResults") maxResults: String,
 		@Query("pageToken") pageToken: String?
 	) : Call<PlaylistYtModel>
+
+	@GET("playlistItems")
+	fun getPlaylistItems(
+		@Query("part") part: String,
+		@Query("playlistId") playlistId: String
+	) : Call<PlaylistItemsModel>
 }

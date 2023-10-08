@@ -15,6 +15,9 @@
         android:theme="@style/Theme.YoutubeAPIKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".activities.PlaylistItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.PlayerActivity"
             android:exported="false" />
         <activity
